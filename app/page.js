@@ -24,7 +24,7 @@ export default function Home() {
   // After coming to middle position of the brand-logo, then page will be navigated to login page.
   setTimeout(() => {
     router.push("./Login"); // Replace with the actual route you want to navigate to
-  }, 1000)
+  }, 1500)
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden p-24">
