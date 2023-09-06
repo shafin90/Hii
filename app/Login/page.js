@@ -1,8 +1,9 @@
 'use client'
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
+import { authContext } from '../layout';
 
 
 
@@ -11,6 +12,9 @@ import 'tippy.js/dist/tippy.css';
 
 const page = () => {
 
+const {name} = useContext(authContext);
+console.log(name)
+ 
     // Tooltip is inilialized here to alert a user about password structure
     useEffect(() => {
         // Initialize tooltips
