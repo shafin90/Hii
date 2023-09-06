@@ -4,8 +4,8 @@
 
 const AllMessage = () => {
     return (
-        <div className="h-5/6 w-full bg-slate-200">
-            hi
+        <div className="h-5/6 w-full bg-slate-200 px-9">
+            
         </div>
     );
 };

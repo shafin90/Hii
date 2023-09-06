@@ -6,10 +6,12 @@
 
 import AllMessage from "../AllMessage/AllMessage";
 import SendingMessageComponent from "../SendingMeesageComponent/SendingMessageComponent";
+import TopBarOfMessageBox from "../TopBarOfMessageBox/TopBarOfMessageBox";
 
 const MessageBox = () => {
     return (
         <div className="w-3/4 h-screen  flex flex-col justify-start items-center">
+            <TopBarOfMessageBox></TopBarOfMessageBox>
             <AllMessage></AllMessage>
             <SendingMessageComponent></SendingMessageComponent>
         </div>
