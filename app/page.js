@@ -18,9 +18,9 @@ export default function Home() {
   useEffect(() => {
     const newTop = 20;
     setTop(newTop);
-
   }, [top]);
-  
+
+
   // After coming to middle position of the brand-logo, then page will be navigated to login page.
   setTimeout(() => {
     router.push("./Login"); // Replace with the actual route you want to navigate to
@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden p-24">
       {/* brand */}
-      <h1 style={brandStyle} ref={brand} className="text-cyan-700 text-8xl relative text-center">
+      <h1 style={brandStyle} ref={brand} className="text-cyan-700 text-8xl  relative text-center">
         Hii
       </h1>
     </main>

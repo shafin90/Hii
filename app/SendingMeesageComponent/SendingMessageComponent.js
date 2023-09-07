@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 
+
 const SendingMessageComponent = () => {
     // Create a state to store the input value
     const [message, setMessage] = useState('');

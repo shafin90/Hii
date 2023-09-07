@@ -4,7 +4,8 @@ import React, { useContext, useEffect } from 'react';
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import { authContext } from '../layout';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 
@@ -12,8 +13,15 @@ import { authContext } from '../layout';
 
 const page = () => {
 
-const {name} = useContext(authContext);
-console.log(name)
+    // Initializing AOS
+    useEffect(() => {
+        AOS.init({
+          duration: 1000, // Duration of the animation
+          offset: 200, // Offset (in pixels) from the top of the element to start the animation
+          easing: 'ease-in-out', // Easing options ('linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out')
+          once: true, // Whether animation should only happen once - while scrolling down
+        });
+      }, []);
  
     // Tooltip is inilialized here to alert a user about password structure
     useEffect(() => {
@@ -27,10 +35,10 @@ console.log(name)
 
     return (
         <div className="flex min-h-screen flex-col items-center justify-center overflow-hidden p-24">
-            <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+            <div data-aos="fade-up" data-aos-duration="1000" className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
                 <h2 className="text-2xl font-semibold mb-6">Login</h2>
 
-                <form className="space-y-4">
+                <form className="space-y-4" >
 
                     <div className="space-y-2">
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">

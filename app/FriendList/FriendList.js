@@ -2,10 +2,24 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faVideo, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import {
+    Button,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverArrow,
+    PopoverHeader,
+    PopoverCloseButton,
+    PopoverBody,
+    PopoverFooter,
+} from "@chakra-ui/react";
+
 
 const FriendList = () => {
     // Create a state to store the search query
     const [searchQuery, setSearchQuery] = useState('');
+    const [isPopoverOpen, setPopoverOpen] = useState(false);
+
 
     // Function to handle search input changes
     const handleSearchInputChange = (e) => {
@@ -57,11 +71,29 @@ const FriendList = () => {
 
 
             {/* Top side green area where user profile pic and logout option is available */}
+
+            {isPopoverOpen && (
+                
+
+                    <Button onClose={() => setPopoverOpen(false)}
+                    autoFocus={false} variant="unstyled" className='w-5/12 h-12 hover:bg-red-800 bg-red-900 text-slate-200'>Logout</Button>
+
+
+            
+            )}
             <div className='relative bg-cyan-700 w-full h-16 p-4 flex justify-between items-center'>
                 {/* LoggedIn user's profile pic */}
                 <img className='w-9 h-9 rounded-full' src='https://www.sportscasting.com/wp-content/uploads/2020/04/Brock-Lesnar.jpg' />
-                <FontAwesomeIcon icon={faEllipsisV} className="text-slate-200 ms-7" />
+
+
+
+                <div onClick={() => setPopoverOpen(!isPopoverOpen)} className='bg-cyan-700 hover:bg-cyan-900 cursor-pointer rounded-full w-8 h-8 flex justify-center items-center'>
+                    <FontAwesomeIcon  icon={faEllipsisV} className="text-slate-200 "  />
+                </div>
+
+
             </div>
+
         </div>
     );
 };
