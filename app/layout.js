@@ -1,11 +1,12 @@
 'use client'
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import './globals.css'
 import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import { app } from '@/firebase.config'
 import { Box, useToast } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
 
 
 
@@ -21,15 +22,30 @@ const auth = getAuth(app);
 export default function RootLayout({ children }) {
 
   const [userInfo, setUserInfo] = useState(null);// user information
+  const router = useRouter() // Declaring router
+  const [allUser, setAllUser] = useState([]); //Information of All users
+  const [frndImg, setFrndImg] = useState('')// This state contain the image of the friend with whol conversation is running. This image will be displayed on the top through the state value
+  const [frndNm, setFrndNm] = useState(''); // same reasone as previous state
+
+
+console.log(frndNm, frndImg)
+
+  // Feting all users information from database
+  fetch('http://localhost:5000/users')
+    .then(res => res.json())
+    .then(data => setAllUser(data))
+
+
+
 
   // Function to register user
   const handleRegistration = (email, password) => {
     console.log(123)
-
+    event.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
-    console.log(email, password)
       .then((userCredential) => {
         setUserInfo(userCredential.user)
+        router.push('./Home')
       })
       .catch((error) => {
         console.log(error.message);
@@ -38,8 +54,9 @@ export default function RootLayout({ children }) {
 
   // Function to login user
   const handleLogin = (email, password) => {
-    event.preventDefault();
+
     console.log(email, password)
+    event.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -54,14 +71,31 @@ export default function RootLayout({ children }) {
   }
 
   //  Function to logout user
-  const handleLogout = () =>{
+  const handleLogout = () => {
     signOut(auth).then(() => {
       setUserInfo('')
-      alert('successfully logout')
+      router.push('./')
     }).catch((error) => {
       // An error happened.
     });
   }
+
+
+  // observer========================================
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (userInfo) => {
+      if (userInfo) {
+        setUserInfo(userInfo);
+
+      } else {
+        setUserInfo(null);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
 
 
@@ -70,7 +104,12 @@ export default function RootLayout({ children }) {
     handleLogin,
     handleRegistration,
     handleLogout,
-    userInfo
+    userInfo,
+    allUser,
+    frndImg,
+    setFrndImg,
+    frndNm,
+    setFrndNm
   }
 
   return (

@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation';
 
 
 const FriendList = () => {
-    const { handleLogout } = useContext(authContext)// getting data from layout.js through context API
+    const { handleLogout, allUser, setFrndImg, setFrndNm } = useContext(authContext)// getting data from layout.js through context API
     const router = useRouter();//Declaring router
 
     // Create a state to store the search query
@@ -31,7 +31,7 @@ const FriendList = () => {
     };
 
     // Function to logout user.
-    const logout = () =>{
+    const logout = () => {
         handleLogout();
         router.push('../Login')
     }
@@ -71,6 +71,35 @@ const FriendList = () => {
 
                     {/* Add your friend list rendering here */}
                 </div>
+
+
+                <ul  className='w-full ps-5'>
+                    {allUser.map(e => <li  className='w-full transition border-b p-3 cursor-pointer hover:bg-cyan-700 hover:text-white text-cyan-700 '>
+                         
+                         <img 
+                         
+                         onClick={e=>{
+                            setFrndNm(e.userName)
+                            setFrndImg(e.photoUrl)
+                         }}
+                         
+                         
+                         className='w-9 h-9 rounded-full inline-block' src={e.photoUrl} />
+                         
+                         
+                         
+                         <p 
+                         onClick={e=>{
+                            setFrndNm(e.userName)
+                            setFrndImg(e.photoUrl)
+                         }}
+                          className='inline-block ms-2 w-4/5   text-sm hover:text-slate-200'>{e.userName}</p>
+                         
+                         
+                         </li>)}
+                </ul>
+
+
             </div>
 
 
@@ -85,7 +114,7 @@ const FriendList = () => {
 
 
                 <Button onClick={logout} onClose={() => setPopoverOpen(false)}
-                    autoFocus={false} variant="unstyled" className='w-5/12 h-12 hover:bg-red-800 bg-red-900 text-slate-200'>Logout</Button>
+                    autoFocus={false} variant="unstyled" className='w-5/12 h-12 hover:bg-red-950 bg-red-900 text-slate-200 cursor:pointer'>Logout</Button>
 
 
 

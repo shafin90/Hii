@@ -5,6 +5,9 @@ import { faPhone, faVideo, faEllipsisV } from "@fortawesome/free-solid-svg-icons
 
 
 const TopBarOfMessageBox = () => {
+    
+    
+    
     return (
         <div className=" w-full h-12 bg-slate-200 px-9 py-9 flex justify-between items-center">
 
