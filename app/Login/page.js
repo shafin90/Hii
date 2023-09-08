@@ -1,28 +1,48 @@
 'use client'
 import Link from 'next/link';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import { authContext } from '../layout';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Box, useToast } from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
 
 
 
 
 
 const page = () => {
+    const router = useRouter()
+    const { handleLogin, userInfo } = useContext(authContext);//Getting data from layout.js through context API
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    
+
+    // Function for handling login of user
+    const login = () => {
+        handleLogin(email, password)
+
+    }
+    if (userInfo) {
+
+        router.push('../Home')
+    }
+
+
 
     // Initializing AOS
     useEffect(() => {
         AOS.init({
-          duration: 1000, // Duration of the animation
-          offset: 200, // Offset (in pixels) from the top of the element to start the animation
-          easing: 'ease-in-out', // Easing options ('linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out')
-          once: true, // Whether animation should only happen once - while scrolling down
+            duration: 1000, // Duration of the animation
+            offset: 200, // Offset (in pixels) from the top of the element to start the animation
+            easing: 'ease-in-out', // Easing options ('linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out')
+            once: true, // Whether animation should only happen once - while scrolling down
         });
-      }, []);
- 
+    }, []);
+
     // Tooltip is inilialized here to alert a user about password structure
     useEffect(() => {
         // Initialize tooltips
@@ -45,6 +65,7 @@ const page = () => {
                             Email Address
                         </label>
                         <input
+                            onChange={e => setEmail(e.target.value)}
                             type="email"
                             id="email"
                             name="email"
@@ -59,6 +80,7 @@ const page = () => {
                             Password
                         </label>
                         <input
+                            onChange={e => setPassword(e.target.value)}
                             type="password"
                             id="password"
                             name="password"
@@ -71,15 +93,14 @@ const page = () => {
 
                     <div>
                         <button
+                            onClick={login}
                             type="submit"
                             className="w-full bg-cyan-700 hover:bg-cyan-900 text-white font-semibold py-2 px-4 rounded-md  focus:outline-none focus:ring focus:ring-indigo-200"
                         >
                             Login
                         </button>
                     </div>
-
                     <p className='text-xs'>Don't have an account? <Link className='font-semibold text-cyan-700' href='../Registration'>Registration</Link></p>
-
 
                 </form>
             </div>

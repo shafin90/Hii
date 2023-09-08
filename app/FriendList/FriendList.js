@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faVideo, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -13,19 +13,28 @@ import {
     PopoverBody,
     PopoverFooter,
 } from "@chakra-ui/react";
+import { authContext } from '../layout';
+import { useRouter } from 'next/navigation';
 
 
 const FriendList = () => {
+    const { handleLogout } = useContext(authContext)// getting data from layout.js through context API
+    const router = useRouter();//Declaring router
+
     // Create a state to store the search query
     const [searchQuery, setSearchQuery] = useState('');
     const [isPopoverOpen, setPopoverOpen] = useState(false);
-
 
     // Function to handle search input changes
     const handleSearchInputChange = (e) => {
         setSearchQuery(e.target.value);
     };
 
+    // Function to logout user.
+    const logout = () =>{
+        handleLogout();
+        router.push('../Login')
+    }
     return (
         <div className="w-1/4 drop-shadow-xl bg-slate-300 h-screen flex flex-col justify-between items-center">
             <div>
@@ -73,13 +82,13 @@ const FriendList = () => {
             {/* Top side green area where user profile pic and logout option is available */}
 
             {isPopoverOpen && (
-                
 
-                    <Button onClose={() => setPopoverOpen(false)}
+
+                <Button onClick={logout} onClose={() => setPopoverOpen(false)}
                     autoFocus={false} variant="unstyled" className='w-5/12 h-12 hover:bg-red-800 bg-red-900 text-slate-200'>Logout</Button>
 
 
-            
+
             )}
             <div className='relative bg-cyan-700 w-full h-16 p-4 flex justify-between items-center'>
                 {/* LoggedIn user's profile pic */}
@@ -88,7 +97,7 @@ const FriendList = () => {
 
 
                 <div onClick={() => setPopoverOpen(!isPopoverOpen)} className='bg-cyan-700 hover:bg-cyan-900 cursor-pointer rounded-full w-8 h-8 flex justify-center items-center'>
-                    <FontAwesomeIcon  icon={faEllipsisV} className="text-slate-200 "  />
+                    <FontAwesomeIcon icon={faEllipsisV} className="text-slate-200 " />
                 </div>
 
 

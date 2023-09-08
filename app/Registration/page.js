@@ -6,13 +6,17 @@ import 'tippy.js/dist/tippy.css';
 import { authContext } from '../layout';
 
 
+
 const page = () => {
     const { handleRegistration, name } = useContext(authContext)// collecting data from layout.js through context API
+    
+
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     console.log(name)
     const register = () => {
         handleRegistration(email, password);
+      
     }
 
 

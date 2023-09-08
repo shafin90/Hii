@@ -3,8 +3,12 @@ import { createContext, useState } from 'react'
 import './globals.css'
 import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { app } from '@/firebase.config'
+import { Box, useToast } from '@chakra-ui/react'
+
+
+
 
 export const metadata = {
   title: 'Create Next App',
@@ -16,8 +20,7 @@ const auth = getAuth(app);
 
 export default function RootLayout({ children }) {
 
-  const [userInfo, setUserInfo] = useState();// user information
-  const [name, setName] = useState('shafin');
+  const [userInfo, setUserInfo] = useState(null);// user information
 
   // Function to register user
   const handleRegistration = (email, password) => {
@@ -33,11 +36,41 @@ export default function RootLayout({ children }) {
       });
   }
 
+  // Function to login user
+  const handleLogin = (email, password) => {
+    event.preventDefault();
+    console.log(email, password)
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUserInfo(user)
+
+        console.log(user)
+        alert('done')
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
+
+  //  Function to logout user
+  const handleLogout = () =>{
+    signOut(auth).then(() => {
+      setUserInfo('')
+      alert('successfully logout')
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
+
+
 
   // These are the value that will be passed through Context API
   const value = {
-    name,
-    handleRegistration
+    handleLogin,
+    handleRegistration,
+    handleLogout,
+    userInfo
   }
 
   return (
