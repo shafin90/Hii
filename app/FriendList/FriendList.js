@@ -68,54 +68,39 @@ const FriendList = () => {
                             />
                         </svg>
                     </div>
-
                     {/* Add your friend list rendering here */}
                 </div>
 
-
                 <ul className='w-full ps-5'>
                     {allUser.map(event => <li onClick={e => {
-                        
                         setFrndImg(event.photoUrl)
                         setFrndNm(event.userName)
                         setBuddyMail(event?.email)
                         // console.log(event?.email)
-                    }} 
-                    className='w-full transition border-b p-3 cursor-pointer hover:bg-cyan-700 hover:text-white text-cyan-700 '>
-
+                    }}
+                        className='w-full transition border-b p-3 cursor-pointer hover:bg-cyan-700 hover:text-white text-cyan-700 '>
                         <img className='w-9 h-9 rounded-full inline-block' src={event.photoUrl} />
                         <p className='inline-block ms-2 w-4/5   text-sm hover:text-slate-200'>{event.userName}</p>
-
-
                     </li>)}
                 </ul>
-
-
             </div>
-
-
-
-
-
-
 
             {/* Top side green area where user profile pic and logout option is available */}
 
-            {isPopoverOpen && (
-
-
-                <Button onClick={logout} onClose={() => setPopoverOpen(false)}
-                    autoFocus={false} variant="unstyled" className='w-5/12 h-12 hover:bg-red-950 bg-red-900 text-slate-200 cursor:pointer'>Logout</Button>
-
-
-
-            )}
             <div className='relative bg-cyan-700 w-full h-16 p-4 flex justify-between items-center'>
                 {/* LoggedIn user's profile pic */}
                 <img className='w-9 h-9 rounded-full' src='https://www.sportscasting.com/wp-content/uploads/2020/04/Brock-Lesnar.jpg' />
 
 
+                {/* Logout Button */}
+                {isPopoverOpen && (
+                    <Button onClick={logout} onClose={() => setPopoverOpen(false)}
+                        autoFocus={false} variant="unstyled" className='w-5/12 h-12 hover:bg-red-950 bg-red-900 text-slate-200   z-10 cursor:pointer'>Logout</Button>
 
+                )}
+
+
+                {/* Three Dot icons */}
                 <div onClick={() => setPopoverOpen(!isPopoverOpen)} className='bg-cyan-700 hover:bg-cyan-900 cursor-pointer rounded-full w-8 h-8 flex justify-center items-center'>
                     <FontAwesomeIcon icon={faEllipsisV} className="text-slate-200 " />
                 </div>
