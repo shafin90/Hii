@@ -1,25 +1,57 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { authContext } from '../layout';
 
 
 const SendingMessageComponent = () => {
-    // Create a state to store the input value
-    const [message, setMessage] = useState('');
+    // Collecting data from layout.js through context API
+    const {message, setMessage, buddyMail, userInfo, sendTrigger, setSendTrigger} = useContext(authContext);
 
     // Function to handle input changes
     const handleMessageChange = (e) => {
         setMessage(e.target.value);
-   
     };
 
+    console.log(sendTrigger)
     // Function to handle sending the message (you can implement the actual sending logic)
     const handleSendMessage = () => {
         // Implement your logic to send the message here
         console.log('Message sent:', message);
 
+        setSendTrigger(false);
+        setTimeout(()=>{
+            setSendTrigger(true)
+        },500)
+
+        fetch('http://localhost:5000/sendMessage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({message, to:buddyMail, from:userInfo.email}),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log('Message sent:', data);
+
+                // Clear the input field
+                setMessage('');
+                
+              
+            })
+            .catch((error) => {
+                console.error('Error sending message:', error);
+            });
+
         // Clear the input field
         setMessage('');
+   
     };
 
     return (

@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation';
 
 
 const FriendList = () => {
-    const { handleLogout, allUser, setFrndImg, setFrndNm } = useContext(authContext)// getting data from layout.js through context API
+    const { handleLogout, allUser, setFrndImg, setFrndNm, buddyMail, setBuddyMail, userInfo } = useContext(authContext)// getting data from layout.js through context API
     const router = useRouter();//Declaring router
 
     // Create a state to store the search query
@@ -73,30 +73,21 @@ const FriendList = () => {
                 </div>
 
 
-                <ul  className='w-full ps-5'>
-                    {allUser.map(e => <li  className='w-full transition border-b p-3 cursor-pointer hover:bg-cyan-700 hover:text-white text-cyan-700 '>
-                         
-                         <img 
-                         
-                         onClick={e=>{
-                            setFrndNm(e.userName)
-                            setFrndImg(e.photoUrl)
-                         }}
-                         
-                         
-                         className='w-9 h-9 rounded-full inline-block' src={e.photoUrl} />
-                         
-                         
-                         
-                         <p 
-                         onClick={e=>{
-                            setFrndNm(e.userName)
-                            setFrndImg(e.photoUrl)
-                         }}
-                          className='inline-block ms-2 w-4/5   text-sm hover:text-slate-200'>{e.userName}</p>
-                         
-                         
-                         </li>)}
+                <ul className='w-full ps-5'>
+                    {allUser.map(event => <li onClick={e => {
+                        
+                        setFrndImg(event.photoUrl)
+                        setFrndNm(event.userName)
+                        setBuddyMail(event?.email)
+                        // console.log(event?.email)
+                    }} 
+                    className='w-full transition border-b p-3 cursor-pointer hover:bg-cyan-700 hover:text-white text-cyan-700 '>
+
+                        <img className='w-9 h-9 rounded-full inline-block' src={event.photoUrl} />
+                        <p className='inline-block ms-2 w-4/5   text-sm hover:text-slate-200'>{event.userName}</p>
+
+
+                    </li>)}
                 </ul>
 
 

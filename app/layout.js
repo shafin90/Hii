@@ -26,9 +26,10 @@ export default function RootLayout({ children }) {
   const [allUser, setAllUser] = useState([]); //Information of All users
   const [frndImg, setFrndImg] = useState('')// This state contain the image of the friend with whol conversation is running. This image will be displayed on the top through the state value
   const [frndNm, setFrndNm] = useState(''); // same reasone as previous state
-
-
-console.log(frndNm, frndImg)
+  const [buddyMail, setBuddyMail] = useState('') // When user choose a friend from friendlist to chat with, then that friend's mail adress stored in this state, so that, all the conversation with friend can be restored.
+  const [message, setMessage] = useState('') // every single conversation.
+  const [conversation, setConversation] = useState([]);// hold all the conversation
+  const [sendTrigger, setSendTrigger] = useState(true);// triggered when send button is clicked
 
   // Feting all users information from database
   fetch('http://localhost:5000/users')
@@ -81,6 +82,10 @@ console.log(frndNm, frndImg)
   }
 
 
+ 
+
+
+
   // observer========================================
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (userInfo) => {
@@ -109,7 +114,15 @@ console.log(frndNm, frndImg)
     frndImg,
     setFrndImg,
     frndNm,
-    setFrndNm
+    setFrndNm,
+    buddyMail,
+    setBuddyMail,
+    message,
+    setMessage,
+    conversation,
+    setConversation,
+    sendTrigger,
+    setSendTrigger
   }
 
   return (

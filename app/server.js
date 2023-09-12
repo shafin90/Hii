@@ -32,6 +32,7 @@ async function run() {
 
 
     const userCollection = client.db("Hii").collection('users');
+    const conversation = client.db("Hii").collection('conversation');
 
 
 
@@ -46,76 +47,29 @@ async function run() {
 
 
 
-
-
-
-
-
-
-    app.get('/users/:id', async (req, res) => {
-      const id = req.params.id;
-      const query = { _id: new ObjectId(id) }
-      const user = await userCollection.findOne(query);
-      res.send(user);
-    })
-
     app.post('/users', async (req, res) => {
-        console.log('done')
+      console.log('done')
       const user = req.body;
       console.log('new user', user);
       const result = await userCollection.insertOne(user);
-   
+
       res.send(result);
     });
 
-    app.put('/users/:id', async (req, res) => {
-      const id = req.params.id;
-      const user = req.body;
-      console.log(id, user);
 
-      const filter = { _id: new ObjectId(id) }
-      const options = { upsert: true }
-      const updatedUser = {
-        $set: {
-          price: user.price,
-          available_quantity: user.available_quantity,
-          detail_description: user.detail_description
-        }
-      }
-
-      const result = await userCollection.updateOne(filter, updatedUser, options);
-      res.send(result);
-
-    })
-
-
-
-    app.delete('/users/:id', async (req, res) => {
-      const id = req.params.id;
-
-
-
-      console.log('vai database theke etare delete koren', id);
-      const query = { _id: new ObjectId(id) }
-
-
-
-
-      // Remove the item from the array based on _id
-      array = array.filter(item => item._id.toString() !== new ObjectId(id).toString());
-
-
-
-
-      const result = await userCollection.deleteOne(query);
+    // Storing message............
+    app.get('/conversation', async (req, res) => {
+      const allConversation = conversation.find()
+      const result = await allConversation.toArray();
       res.send(result);
     })
 
-    // moy toy
-    app.get('/mytoys', async (req, res) => {
 
-      res.send(array);
-    })
+    app.post('/sendMessage', async (req, res) => {
+      const message = req.body;
+      const result = await conversation.insertOne(message);
+      res.send(result);
+    });
 
 
 
