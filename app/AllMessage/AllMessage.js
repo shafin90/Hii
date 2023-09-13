@@ -24,20 +24,22 @@ const AllMessage = () => {
 
 
     useEffect(() => {
-      const newChat = text.filter(e=>(e.from==userInfo?.email && e.to==buddyMail ) || (e.to==userInfo?.email && e.from==buddyMail ) );
-      setChat(newChat);
+        const newChat = text.filter(e => (e.from == userInfo?.email && e.to == buddyMail) || (e.to == userInfo?.email && e.from == buddyMail));
+        setChat(newChat);
 
 
-      console.log(chat)
+        console.log(chat)
         messageDivRef.current.scrollTop = messageDivRef.current.scrollHeight;
     }, [text, setText])
 
     return (
-        <div className="h-5/6 flex flex-col justify-end items-end w-full bg-slate-200 overflow-y-scroll px-9" ref={messageDivRef}>
-            {
-                chat.map(e => <div className={e.to==buddyMail?" w-full flex justify-end items-center":" w-full flex justify-start items-center"} ><p className={e.to==buddyMail?" bg-cyan-900 rounded-xl inline-block text-white px-3 py-2 mb-3":" bg-white rounded-xl  inline-block text-cyan-950 px-3 py-2 mb-3"}>{e.message}</p></div>)
-            }
+        <div className="h-5/6 overflow-y-scroll w-full">
+            <div className=" flex flex-col justify-end items-end w-full bg-slate-200  px-9" ref={messageDivRef}>
+                {
+                    chat.map(e => <div className={e.to == buddyMail ? " w-full flex justify-end items-center" : " w-full flex justify-start items-center"} ><p className={e.to == buddyMail ? " bg-cyan-900 rounded-xl inline-block text-white px-3 py-2 mb-3" : " bg-white rounded-xl  inline-block text-cyan-950 px-3 py-2 mb-3"}>{e.message}</p></div>)
+                }
 
+            </div>
         </div>
     );
 };
