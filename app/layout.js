@@ -35,7 +35,8 @@ export default function RootLayout({ children }) {
   const [loggedInUserName, setLoggedInUserName] = useState('') // Hold currently loggedinUser's name
   const [loggedInUserPhoneNumber, setLoggedInUserPhoneNumber] = useState('') // Hold currently loggedinUser's phone number
   const [userLoadTrigger, setUserLoadTrigger] = useState(true); // When registration is doen, this triger is fired, and all users data fetched
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);// Screen width in different device
 
   // Feting all users information from database
   useEffect(() => {
@@ -44,10 +45,29 @@ export default function RootLayout({ children }) {
       .then(data => setAllUser(data))
   }, [userLoadTrigger, setUserLoadTrigger])
 
+  //measuring the screen size
+  // Define a function to update the screenWidth state
+  const updateScreenWidth = () => {
+    setScreenWidth(window.innerWidth);
+  };
 
-  
+  // Add an event listener to update the screenWidth when the window is resized
+  useEffect(() => {
+    window.addEventListener('resize', updateScreenWidth);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', updateScreenWidth);
+    };
+  }, []);
+
+  console.log(screenWidth)
+
+
+
+
   setTimeout(() => {
-      setSendTrigger(!sendTrigger)
+    setSendTrigger(!sendTrigger)
   }, 500)
 
 
@@ -127,6 +147,10 @@ export default function RootLayout({ children }) {
   }, []);
 
 
+  const onOpenList = () => {
+    setIsOpen(true);
+  }
+
 
   // These are the value that will be passed through Context API
   const value = {
@@ -150,7 +174,11 @@ export default function RootLayout({ children }) {
     profilePic,
     loggedInUserName,
     loggedInUserMail,
-    loggedInUserPhoneNumber
+    loggedInUserPhoneNumber,
+    isOpen,
+    setIsOpen,
+    onOpenList,
+    screenWidth
   }
 
   return (

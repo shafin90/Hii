@@ -1,7 +1,7 @@
 'use client'
 //This is the top most component of MessageBox component. In this component, there is an image of message reciever with his/her name and also three dot icon to show that person's info. Also there might be calling feature option.  
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faVideo, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faVideo, faEllipsisV, faPeopleGroup } from "@fortawesome/free-solid-svg-icons";
 import React, { useContext, useState, useRef } from "react";
 import { authContext } from "../layout";
 import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input } from "@chakra-ui/react";
@@ -13,7 +13,7 @@ import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFoo
 
 const TopBarOfMessageBox = () => {
 
-    const { frndNm, frndImg } = useContext(authContext); // collecting data from layout.js through context API
+    const { screenWidth, frndNm, frndImg, onOpenList } = useContext(authContext); // collecting data from layout.js through context API
 
     
         
@@ -49,6 +49,9 @@ const TopBarOfMessageBox = () => {
 
             {/* This section contains audio call icon, vide call icon and three dot menu icon */}
             <div className=" flex justify-between items-center">
+               
+             {screenWidth<576 &&   <FontAwesomeIcon onClick={onOpenList} icon={faPeopleGroup} className="text-cyan-700  me-5 cursor-pointer" />}
+               
                 {/* audio calling icon */}
                 <FontAwesomeIcon icon={faPhone} className="text-cyan-700 mr-3 cursor-pointer" />
                 

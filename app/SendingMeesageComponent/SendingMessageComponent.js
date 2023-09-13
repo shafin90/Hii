@@ -6,7 +6,7 @@ import { authContext } from '../layout';
 
 const SendingMessageComponent = () => {
     // Collecting data from layout.js through context API
-    const {message, setMessage, buddyMail, userInfo, sendTrigger, setSendTrigger } = useContext(authContext);
+    const {screenWidth,message, setMessage, buddyMail, userInfo, sendTrigger, setSendTrigger } = useContext(authContext);
 
     // Function to handle input changes
     const handleMessageChange = (e) => {
@@ -61,20 +61,20 @@ const SendingMessageComponent = () => {
     };
 
     return (
-        <div className='w-full h-1/6 px-28  bg-slate-200 flex justify-around items-center'>
+        <div className={screenWidth<576?'w-full h-1/6 px-3 bg-slate-200 flex justify-between items-center':'w-full h-1/6 px-28 bg-slate-200 flex justify-around items-center'}>
             <input
                 type='text'
                 placeholder='Type your message...'
                 value={message}
                 onChange={handleMessageChange}
-                className='w-9/12 p-2 border rounded-l   border-gray-300 '
+                className='w-9/12 p-2 border rounded-l border-gray-300'
                 onKeyDown={handleKeyDown}
             />
             <button
                 onClick={handleSendMessage}
-                className='w-2/12 ms-5 bg-cyan-700 hover:bg-cyan-900 text-white font-semibold p-2 rounded-r'
+                className={screenWidth<576?'w-2/12 p-2 rounded-full text-sm bg-cyan-700 hover:bg-cyan-900 text-white font-semibold  rounded-r':'w-2/12 ms-5 bg-cyan-700 hover:bg-cyan-900 text-white font-semibold p-2 rounded-r'}
             >
-                Send
+                {screenWidth<576?">>":"send"}
             </button>
         </div>
     );

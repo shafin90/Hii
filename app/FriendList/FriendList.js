@@ -28,7 +28,7 @@ import { useRouter } from 'next/navigation';
 
 
 const FriendList = () => {
-    const { handleLogout, allUser, setFrndImg, setFrndNm, buddyMail, setBuddyMail, profilePic, loggedInUserName, loggedInUserMail, loggedInUserPhoneNumber } = useContext(authContext)// getting data from layout.js through context API
+    const { screenWidth, handleLogout, allUser, setFrndImg, setFrndNm, buddyMail, setBuddyMail, profilePic, loggedInUserName, loggedInUserMail, loggedInUserPhoneNumber } = useContext(authContext)// getting data from layout.js through context API
     const router = useRouter();//Declaring router
 
     // Create a state to store the search query
@@ -63,7 +63,7 @@ const FriendList = () => {
     }
 
     return (
-        <div className="w-1/4 drop-shadow-xl bg-slate-300 h-screen flex flex-col justify-between items-center">
+        <div className={screenWidth<576?'hidden':"w-1/4 drop-shadow-xl bg-slate-300 h-screen flex flex-col justify-between items-center"}>
             <div>
                 <div className="p-4">
                     {/* Input field to search a friend*/}
