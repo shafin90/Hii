@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
   const [loggedInUserPhoneNumber, setLoggedInUserPhoneNumber] = useState('') // Hold currently loggedinUser's phone number
   const [userLoadTrigger, setUserLoadTrigger] = useState(true); // When registration is doen, this triger is fired, and all users data fetched
   const [isOpen, setIsOpen] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);// Screen width in different device
+  const [screenWidth, setScreenWidth] = useState(1359);// Screen width in different device
 
   // Feting all users information from database
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function RootLayout({ children }) {
     };
   }, []);
 
-  console.log(screenWidth)
+
 
 
 
