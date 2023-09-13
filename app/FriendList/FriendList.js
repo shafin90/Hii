@@ -12,18 +12,30 @@ import {
     PopoverCloseButton,
     PopoverBody,
     PopoverFooter,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalCloseButton,
+    ModalBody,
+    ModalFooter
 } from "@chakra-ui/react";
 import { authContext } from '../layout';
 import { useRouter } from 'next/navigation';
 
 
+
+
+
 const FriendList = () => {
-    const { handleLogout, allUser, setFrndImg, setFrndNm, buddyMail, setBuddyMail, userInfo } = useContext(authContext)// getting data from layout.js through context API
+    const { handleLogout, allUser, setFrndImg, setFrndNm, buddyMail, setBuddyMail, profilePic,  loggedInUserName, loggedInUserMail, loggedInUserPhoneNumber } = useContext(authContext)// getting data from layout.js through context API
     const router = useRouter();//Declaring router
 
     // Create a state to store the search query
     const [searchQuery, setSearchQuery] = useState('');
     const [isPopoverOpen, setPopoverOpen] = useState(false);
+    const [isUserProfileModalOpen, setUserProfileModalOpen] = useState(false); // Track the modal's open state
+
 
     // Function to handle search input changes
     const handleSearchInputChange = (e) => {
@@ -35,6 +47,19 @@ const FriendList = () => {
         handleLogout();
         router.push('../Login')
     }
+
+
+
+    // Function to open the user profile modal
+    const openUserProfileModal = () => {
+        setUserProfileModalOpen(true);
+    }
+
+    // Function to close the user profile modal
+    const closeUserProfileModal = () => {
+        setUserProfileModalOpen(false);
+    }
+
     return (
         <div className="w-1/4 drop-shadow-xl bg-slate-300 h-screen flex flex-col justify-between items-center">
             <div>
@@ -89,7 +114,7 @@ const FriendList = () => {
 
             <div className='relative bg-cyan-700 w-full h-16 p-4 flex justify-between items-center'>
                 {/* LoggedIn user's profile pic */}
-                <img className='w-9 h-9 rounded-full' src='https://www.sportscasting.com/wp-content/uploads/2020/04/Brock-Lesnar.jpg' />
+                <img className='w-9 h-9 rounded-full cursor-pointer' src={profilePic}  onClick={openUserProfileModal} />
 
 
                 {/* Logout Button */}
@@ -107,6 +132,29 @@ const FriendList = () => {
 
 
             </div>
+
+
+
+            {/* Need a modal here */}
+            <Modal className=" w-3/5 h-4/6 " isOpen={isUserProfileModalOpen} onClose={closeUserProfileModal}>
+                <ModalOverlay />
+                <ModalContent className=' bg-cyan-900  w-5/6 h-5/6 flex justify-center items-center'>
+                    
+                    <ModalBody className=' w-3/4 mt-12'>
+                        {/* Display user profile information here */}
+                        <img className='w-24 h-24 rounded-full' src={profilePic} alt="User Profile" />
+                        <h1 className=' font-semibold mt-2 text-white text-4xl '>{loggedInUserName}</h1>
+                        <p className=' text-white my-2'>{loggedInUserMail}</p>
+                        <p className=' text-white'>{loggedInUserPhoneNumber}</p>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button className=' w-28 h-10 bg-cyan-50 rounded-xl mb-10 text-cyan-950' onClick={closeUserProfileModal}>
+                            Close
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+
 
         </div>
     );

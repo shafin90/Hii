@@ -30,6 +30,10 @@ export default function RootLayout({ children }) {
   const [message, setMessage] = useState('') // every single conversation.
   const [conversation, setConversation] = useState([]);// hold all the conversation
   const [sendTrigger, setSendTrigger] = useState(true);// triggered when send button is clicked
+  const [profilePic, setProfilePic] = useState('');// Holds profile pic
+  const [loggedInUserMail, setLoggedInUserMail] = useState('') // Hold currently loggedinUser's mail
+  const [loggedInUserName, setLoggedInUserName] = useState('') // Hold currently loggedinUser's name
+  const [loggedInUserPhoneNumber, setLoggedInUserPhoneNumber] = useState('') // Hold currently loggedinUser's phone number
 
   // Feting all users information from database
   fetch('http://localhost:5000/users')
@@ -82,8 +86,19 @@ export default function RootLayout({ children }) {
   }
 
 
- 
 
+
+  // Filtering data to find currently loggedIn User and finally find the profile pic
+  useEffect(() => {
+    const demoUser = allUser.filter(e => e.email == userInfo?.email);
+    setProfilePic(demoUser[0]?.photoUrl);
+    setLoggedInUserName(demoUser[0]?.userName);
+    setLoggedInUserMail(demoUser[0]?.email);
+    setLoggedInUserPhoneNumber(demoUser[0]?.phoneNumber)
+  
+  },[allUser, setAllUser])
+
+  
 
 
   // observer========================================
@@ -122,7 +137,11 @@ export default function RootLayout({ children }) {
     conversation,
     setConversation,
     sendTrigger,
-    setSendTrigger
+    setSendTrigger,
+    profilePic,
+    loggedInUserName,
+    loggedInUserMail,
+    loggedInUserPhoneNumber
   }
 
   return (
