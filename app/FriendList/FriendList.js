@@ -27,7 +27,7 @@ import { useRouter } from 'next/navigation';
 
 
 
-const FriendList = ({visibility}) => {
+const FriendList = ({visibility,size}) => {
     const { screenWidth, handleLogout, allUser, setFrndImg, setFrndNm, buddyMail, setBuddyMail, profilePic, loggedInUserName, loggedInUserMail, loggedInUserPhoneNumber } = useContext(authContext)// getting data from layout.js through context API
     const router = useRouter();//Declaring router
 
@@ -65,7 +65,7 @@ const FriendList = ({visibility}) => {
 
  
     return (
-        <div  className={visibility=='flex'?"w-1/4 drop-shadow-xl bg-slate-300 h-screen flex flex-col justify-between items-center":"w-1/4 drop-shadow-xl bg-slate-300 h-screen hidden"}>
+        <div  className={visibility=='flex'?size=="chotoDevice"?"w-3/4 drop-shadow-xl bg-slate-300 h-screen flex flex-col justify-between items-center":"w-1/4 drop-shadow-xl bg-slate-300 h-screen flex flex-col justify-between items-center":"w-1/4 drop-shadow-xl bg-slate-300 h-screen hidden"}>
             <div>
                 <div className="p-4">
                     {/* Input field to search a friend*/}
