@@ -27,7 +27,7 @@ import { useRouter } from 'next/navigation';
 
 
 
-const FriendList = () => {
+const FriendList = ({visibility}) => {
     const { screenWidth, handleLogout, allUser, setFrndImg, setFrndNm, buddyMail, setBuddyMail, profilePic, loggedInUserName, loggedInUserMail, loggedInUserPhoneNumber } = useContext(authContext)// getting data from layout.js through context API
     const router = useRouter();//Declaring router
 
@@ -62,8 +62,10 @@ const FriendList = () => {
         setUserProfileModalOpen(false);
     }
 
+
+ 
     return (
-        <div className={screenWidth<576?'hidden':"w-1/4 drop-shadow-xl bg-slate-300 h-screen flex flex-col justify-between items-center"}>
+        <div  className={visibility=='flex'?"w-1/4 drop-shadow-xl bg-slate-300 h-screen flex flex-col justify-between items-center":"w-1/4 drop-shadow-xl bg-slate-300 h-screen hidden"}>
             <div>
                 <div className="p-4">
                     {/* Input field to search a friend*/}
@@ -98,7 +100,7 @@ const FriendList = () => {
                     {/* Add your friend list rendering here */}
                 </div>
 
-                <ul className='w-full ps-5'>
+                <ul className='w-full ps-5 '>
                     {allUser.map(event => <li onClick={e => {
                         setFrndImg(event.photoUrl)
                         setFrndNm(event.userName)

@@ -32,7 +32,7 @@ const Home = () => {
                     <DrawerCloseButton />
 
                     <DrawerBody className="h-full flex  justify-center items-center">
-                        <FriendList></FriendList>
+                        <FriendList visibility={screenWidth>576?"none":"flex"}></FriendList>
 
                         <Button className="bg-slate-300 ms-11 px-4 py-2 mt-3 w-20 rounded" variant='outline' mr={3} onClick={onClose}>
                             Cancel
@@ -41,7 +41,7 @@ const Home = () => {
                 </DrawerContent>
             </Drawer>
 
-            <FriendList></FriendList>
+            <FriendList visibility={screenWidth<576?"none":"flex"}></FriendList>
             <MessageBox></MessageBox>
         </div>
     );

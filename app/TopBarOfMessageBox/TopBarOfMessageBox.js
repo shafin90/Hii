@@ -36,7 +36,7 @@ const TopBarOfMessageBox = () => {
 
 
     return (
-        <div className=" w-full h-12 bg-slate-200 px-9 py-9 flex justify-between items-center">
+        <div className={screenWidth>576?" w-full h-12 bg-slate-200 px-9 py-9 flex justify-between items-center":" w-full h-12 bg-slate-200 px-3 py-9 flex justify-between items-center"}>
 
             {/* This section contain profile pic or message reciever and name */}
             <div>
@@ -44,7 +44,7 @@ const TopBarOfMessageBox = () => {
                 <img className="w-10 h-10 rounded-full inline  " src={frndImg} />
 
                 {/* Message reciever's name */}
-                <p className="inline font-semibold text-cyan-700  ms-4">{frndNm}</p>
+                <p className="inline font-semibold text-cyan-700  ms-4">{screenWidth<576?'':frndNm}</p>
             </div>
 
             {/* This section contains audio call icon, vide call icon and three dot menu icon */}
@@ -57,7 +57,7 @@ const TopBarOfMessageBox = () => {
                 
                 {/* Video calling icon */}
                 <FontAwesomeIcon icon={faVideo} className="text-cyan-700 mr-3 ms-3 cursor-pointer" />
-                <div onClick={onOpen} className="w-7 h-7 rounded-full bg-slate-200 hover:bg-slate-400 ms-7 cursor-pointer flex justify-center items-center">
+                <div onClick={onOpen} className={screenWidth<576?"w-7 h-7 rounded-full bg-slate-200 hover:bg-slate-400  cursor-pointer flex justify-center items-center":"w-7 h-7 rounded-full bg-slate-200 hover:bg-slate-400 ms-7 cursor-pointer flex justify-center items-center"}>
                     <FontAwesomeIcon icon={faEllipsisV} className=" text-cyan-700 "  />
                 </div>
             </div>
