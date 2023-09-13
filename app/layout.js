@@ -34,11 +34,15 @@ export default function RootLayout({ children }) {
   const [loggedInUserMail, setLoggedInUserMail] = useState('') // Hold currently loggedinUser's mail
   const [loggedInUserName, setLoggedInUserName] = useState('') // Hold currently loggedinUser's name
   const [loggedInUserPhoneNumber, setLoggedInUserPhoneNumber] = useState('') // Hold currently loggedinUser's phone number
+  const [userLoadTrigger, setUserLoadTrigger] = useState(true); // When registration is doen, this triger is fired, and all users data fetched
+
 
   // Feting all users information from database
-  fetch('http://localhost:5000/users')
-    .then(res => res.json())
-    .then(data => setAllUser(data))
+  useEffect(() => {
+    fetch('http://localhost:5000/users')
+      .then(res => res.json())
+      .then(data => setAllUser(data))
+  }, [userLoadTrigger, setUserLoadTrigger])
 
 
 
@@ -50,6 +54,7 @@ export default function RootLayout({ children }) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         setUserInfo(userCredential.user)
+        setUserLoadTrigger(!userLoadTrigger)
         router.push('./Home')
       })
       .catch((error) => {
@@ -66,7 +71,7 @@ export default function RootLayout({ children }) {
       .then((userCredential) => {
         const user = userCredential.user;
         setUserInfo(user)
-
+        setUserLoadTrigger(!userLoadTrigger)
         console.log(user)
         alert('done')
       })
@@ -95,10 +100,10 @@ export default function RootLayout({ children }) {
     setLoggedInUserName(demoUser[0]?.userName);
     setLoggedInUserMail(demoUser[0]?.email);
     setLoggedInUserPhoneNumber(demoUser[0]?.phoneNumber)
-  
-  },[allUser, setAllUser])
 
-  
+  }, [allUser, setAllUser])
+
+
 
 
   // observer========================================
