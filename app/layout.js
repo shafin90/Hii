@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
 
   // Feting all users information from database
   useEffect(() => {
-    fetch('http://localhost:5000/users')
+    fetch('https://hii-server-u2tu.vercel.app//users')
       .then(res => res.json())
       .then(data => setAllUser(data))
   }, [userLoadTrigger, setUserLoadTrigger])

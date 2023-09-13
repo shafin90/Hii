@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import tippy from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 import { authContext } from '../layout';
-import { useRouter } from 'next/navigation';
+
 
 
 
@@ -18,14 +18,13 @@ console.log(userInfo)
     const [phoneNumber, setPhoneNumber] = useState('');
     const [userName, setUserName] = useState('')
 
-    //Declaring router 
-    const router = useRouter();
+    
 
     const register = () => {
         handleRegistration(email, password);
 
         //saving data to database
-        fetch("http://localhost:5000/users", {
+        fetch("https://hii-server-u2tu.vercel.app//users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -48,10 +47,6 @@ console.log(userInfo)
             });
 
 
-    }
-
-    if(userInfo){
-        router.push('../Home')
     }
 
 

@@ -17,7 +17,7 @@ const AllMessage = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/conversation')
+        fetch('https://hii-server-u2tu.vercel.app//conversation')
             .then(res => res.json())
             .then(data => setText(data))
     }, [sendTrigger, setSendTrigger, setBuddyMail, buddyMail])
