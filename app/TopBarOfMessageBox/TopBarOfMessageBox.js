@@ -16,8 +16,7 @@ const TopBarOfMessageBox = () => {
     const { frndNm, frndImg } = useContext(authContext); // collecting data from layout.js through context API
 
     
-    const router = useRouter();
-    
+        
     // Define state variables for the drawer
     const [isOpen, setIsOpen] = useState(false);
     const btnRef = React.useRef();
@@ -34,10 +33,6 @@ const TopBarOfMessageBox = () => {
 
 
  
-
-    const videCall= ()=>{
-        router.push('../Room')
-    }
 
 
     return (
@@ -58,7 +53,7 @@ const TopBarOfMessageBox = () => {
                 <FontAwesomeIcon icon={faPhone} className="text-cyan-700 mr-3 cursor-pointer" />
                 
                 {/* Video calling icon */}
-                <FontAwesomeIcon onClick={videCall} icon={faVideo} className="text-cyan-700 mr-3 ms-3 cursor-pointer" />
+                <FontAwesomeIcon icon={faVideo} className="text-cyan-700 mr-3 ms-3 cursor-pointer" />
                 <div onClick={onOpen} className="w-7 h-7 rounded-full bg-slate-200 hover:bg-slate-400 ms-7 cursor-pointer flex justify-center items-center">
                     <FontAwesomeIcon icon={faEllipsisV} className=" text-cyan-700 "  />
                 </div>
