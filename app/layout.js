@@ -45,6 +45,10 @@ export default function RootLayout({ children }) {
   }, [userLoadTrigger, setUserLoadTrigger])
 
 
+  
+  setTimeout(() => {
+      setSendTrigger(!sendTrigger)
+  }, 500)
 
 
   // Function to register user

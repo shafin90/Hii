@@ -58,7 +58,7 @@ const TopBarOfMessageBox = () => {
                         <h1>Name</h1>
                         <h1>Name</h1>
                         <h1>Name</h1>
-                        <Button className=" bg-slate-50" variant='outline' mr={3} onClick={onClose}>
+                        <Button className="  bg-slate-300  px-4 py-2 mt-3 w-20 rounded " variant='outline' mr={3} onClick={onClose}>
                             Cancel
                         </Button>
                     </DrawerBody>

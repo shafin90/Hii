@@ -19,10 +19,7 @@ const SendingMessageComponent = () => {
         // Implement your logic to send the message here
         console.log('Message sent:', message);
 
-        setSendTrigger(false);
-        setTimeout(() => {
-            setSendTrigger(true)
-        }, 500)
+      
 
         fetch('https://hii-server-u2tu.vercel.app/sendMessage', {
             method: 'POST',
