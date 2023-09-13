@@ -24,7 +24,7 @@ const SendingMessageComponent = () => {
             setSendTrigger(true)
         }, 500)
 
-        fetch('https://hii-server-u2tu.vercel.app//sendMessage', {
+        fetch('https://hii-server-u2tu.vercel.app/sendMessage', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

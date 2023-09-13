@@ -24,7 +24,7 @@ console.log(userInfo)
         handleRegistration(email, password);
 
         //saving data to database
-        fetch("https://hii-server-u2tu.vercel.app//users", {
+        fetch("https://hii-server-u2tu.vercel.app/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
