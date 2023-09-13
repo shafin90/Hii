@@ -40,9 +40,11 @@ const FriendList = ({visibility,size}) => {
     // Function to handle search input changes
     const handleSearchInputChange = (e) => {
         setSearchQuery(e.target.value);
-       
-
-    };
+        console.log(allUser[0].phoneNumber)
+        console.log(searchQuery)
+        const newSelectedUser = allUser.find(e=>e.phoneNumber==searchQuery)
+        console.log(newSelectedUser)
+   };
 
     // Function to logout user.
     const logout = () => {

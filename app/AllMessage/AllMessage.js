@@ -29,7 +29,6 @@ const AllMessage = () => {
         setChat(newChat);
 
 
-        console.log(chat)
 
     }, [text, setText])
 
