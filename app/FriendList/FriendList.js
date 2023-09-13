@@ -28,18 +28,20 @@ import { useRouter } from 'next/navigation';
 
 
 const FriendList = () => {
-    const { handleLogout, allUser, setFrndImg, setFrndNm, buddyMail, setBuddyMail, profilePic,  loggedInUserName, loggedInUserMail, loggedInUserPhoneNumber } = useContext(authContext)// getting data from layout.js through context API
+    const { handleLogout, allUser, setFrndImg, setFrndNm, buddyMail, setBuddyMail, profilePic, loggedInUserName, loggedInUserMail, loggedInUserPhoneNumber } = useContext(authContext)// getting data from layout.js through context API
     const router = useRouter();//Declaring router
 
     // Create a state to store the search query
     const [searchQuery, setSearchQuery] = useState('');
     const [isPopoverOpen, setPopoverOpen] = useState(false);
     const [isUserProfileModalOpen, setUserProfileModalOpen] = useState(false); // Track the modal's open state
-
+    const [list, setList] = useState([]);
 
     // Function to handle search input changes
     const handleSearchInputChange = (e) => {
         setSearchQuery(e.target.value);
+       
+
     };
 
     // Function to logout user.
@@ -68,7 +70,7 @@ const FriendList = () => {
                     <div className="relative">
                         <input
                             type="text"
-                            placeholder="Search friends..."
+                            placeholder="Search phone number"
                             value={searchQuery}
                             onChange={handleSearchInputChange}
                             className="w-full p-2 pr-10 border rounded border-gray-300"
@@ -114,7 +116,7 @@ const FriendList = () => {
 
             <div className='relative bg-cyan-700 w-full h-16 p-4 flex justify-between items-center'>
                 {/* LoggedIn user's profile pic */}
-                <img className='w-9 h-9 rounded-full cursor-pointer' src={profilePic}  onClick={openUserProfileModal} />
+                <img className='w-9 h-9 rounded-full cursor-pointer' src={profilePic} onClick={openUserProfileModal} />
 
 
                 {/* Logout Button */}
@@ -139,7 +141,7 @@ const FriendList = () => {
             <Modal className=" w-3/5 h-4/6 " isOpen={isUserProfileModalOpen} onClose={closeUserProfileModal}>
                 <ModalOverlay />
                 <ModalContent className=' bg-cyan-900  w-5/6 h-5/6 flex justify-center items-center'>
-                    
+
                     <ModalBody className=' w-3/4 mt-12'>
                         {/* Display user profile information here */}
                         <img className='w-24 h-24 rounded-full' src={profilePic} alt="User Profile" />

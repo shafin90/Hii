@@ -2,9 +2,11 @@
 //This is the top most component of MessageBox component. In this component, there is an image of message reciever with his/her name and also three dot icon to show that person's info. Also there might be calling feature option.  
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faVideo, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-import React, { useContext, useState ,useRef} from "react";
+import React, { useContext, useState, useRef } from "react";
 import { authContext } from "../layout";
 import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input } from "@chakra-ui/react";
+
+
 
 
 const TopBarOfMessageBox = () => {
@@ -24,6 +26,10 @@ const TopBarOfMessageBox = () => {
     const onClose = () => {
         setIsOpen(false);
     };
+
+
+ 
+
     return (
         <div className=" w-full h-12 bg-slate-200 px-9 py-9 flex justify-between items-center">
 
@@ -37,10 +43,15 @@ const TopBarOfMessageBox = () => {
             </div>
 
             {/* This section contains audio call icon, vide call icon and three dot menu icon */}
-            <div>
+            <div className=" flex justify-between items-center">
+                {/* audio calling icon */}
                 <FontAwesomeIcon icon={faPhone} className="text-cyan-700 mr-3 cursor-pointer" />
-                <FontAwesomeIcon icon={faVideo} className="text-cyan-700 mr-3 ms-3 cursor-pointer" />
-                <FontAwesomeIcon icon={faEllipsisV} className="text-cyan-700 ms-7 cursor-pointer"  onClick={onOpen} />
+                
+                {/* Video calling icon */}
+                <FontAwesomeIcon  icon={faVideo} className="text-cyan-700 mr-3 ms-3 cursor-pointer" />
+                <div onClick={onOpen} className="w-7 h-7 rounded-full bg-slate-200 hover:bg-slate-400 ms-7 cursor-pointer flex justify-center items-center">
+                    <FontAwesomeIcon icon={faEllipsisV} className=" text-cyan-700 "  />
+                </div>
             </div>
 
 
@@ -49,20 +60,20 @@ const TopBarOfMessageBox = () => {
 
             {/* Chakra UI- Drawer */}
 
-            <Drawer isOpen={isOpen} placement='right'  onClose={onClose}  finalFocusRef={btnRef}>
+            <Drawer isOpen={isOpen} placement='right' onClose={onClose} finalFocusRef={btnRef}>
                 <DrawerOverlay />
-                <DrawerContent  className=" bg-cyan-950">
+                <DrawerContent className=" bg-cyan-950">
                     <DrawerCloseButton />
-    
+
                     <DrawerBody className=" h-full flex flex-col justify-center items-center">
                         <img src={frndImg} className=" w-40 h-40 rounded-full mb-3" />
                         <h1 className=" text-white  text-4xl mb-3 font-semibold ">{frndNm}</h1>
-                        
+
                         <Button className="  bg-slate-300  px-4 py-2 mt-3 w-20 rounded " variant='outline' mr={3} onClick={onClose}>
                             Cancel
                         </Button>
                     </DrawerBody>
-                   
+
                 </DrawerContent>
             </Drawer>
 

@@ -6,20 +6,17 @@ import { authContext } from '../layout';
 
 const SendingMessageComponent = () => {
     // Collecting data from layout.js through context API
-    const { message, setMessage, buddyMail, userInfo, sendTrigger, setSendTrigger } = useContext(authContext);
+    const {message, setMessage, buddyMail, userInfo, sendTrigger, setSendTrigger } = useContext(authContext);
 
     // Function to handle input changes
     const handleMessageChange = (e) => {
         setMessage(e.target.value);
     };
 
-    console.log(sendTrigger)
     // Function to handle sending the message (you can implement the actual sending logic)
     const handleSendMessage = () => {
         // Implement your logic to send the message here
         console.log('Message sent:', message);
-
-      
 
         fetch('https://hii-server-u2tu.vercel.app/sendMessage', {
             method: 'POST',
@@ -39,6 +36,7 @@ const SendingMessageComponent = () => {
 
                 // Clear the input field
                 setMessage('');
+             
 
 
             })
