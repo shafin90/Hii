@@ -55,9 +55,9 @@ const TopBarOfMessageBox = () => {
                     <DrawerCloseButton />
     
                     <DrawerBody className=" h-full flex flex-col justify-center items-center">
-                        <h1>Name</h1>
-                        <h1>Name</h1>
-                        <h1>Name</h1>
+                        <img src={frndImg} className=" w-40 h-40 rounded-full mb-3" />
+                        <h1 className=" text-white  text-4xl mb-3 font-semibold ">{frndNm}</h1>
+                        
                         <Button className="  bg-slate-300  px-4 py-2 mt-3 w-20 rounded " variant='outline' mr={3} onClick={onClose}>
                             Cancel
                         </Button>
