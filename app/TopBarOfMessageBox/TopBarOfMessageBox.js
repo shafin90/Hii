@@ -5,7 +5,8 @@ import { faPhone, faVideo, faEllipsisV } from "@fortawesome/free-solid-svg-icons
 import React, { useContext, useState, useRef } from "react";
 import { authContext } from "../layout";
 import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input } from "@chakra-ui/react";
-import { ZegoExpressEngine } from "zego-express-engine-webrtc";
+import { useRouter } from "next/navigation";
+
 
 
 
@@ -14,6 +15,9 @@ const TopBarOfMessageBox = () => {
 
     const { frndNm, frndImg } = useContext(authContext); // collecting data from layout.js through context API
 
+    
+    const router = useRouter();
+    
     // Define state variables for the drawer
     const [isOpen, setIsOpen] = useState(false);
     const btnRef = React.useRef();
@@ -30,23 +34,11 @@ const TopBarOfMessageBox = () => {
 
 
  
-     // Function to make a video call
-  const makeVideoCall = (frndID) => {
-    // Create a ZegoExpressEngine instance.
-    const engine = new ZegoExpressEngine();
 
-    // Start the local video preview.
-    engine.startPreview();
+    const videCall= ()=>{
+        router.push('../Room')
+    }
 
-    // Publish the local video stream to ZEGOCLOUD.
-    engine.publishStream("local", "video");
-
-    // Join the same room as the other user.
-    engine.joinRoom("roomID", frndID);
-
-    // Start the remote video playback.
-    engine.playStream("remote", "video");
-  };
 
     return (
         <div className=" w-full h-12 bg-slate-200 px-9 py-9 flex justify-between items-center">
@@ -66,7 +58,7 @@ const TopBarOfMessageBox = () => {
                 <FontAwesomeIcon icon={faPhone} className="text-cyan-700 mr-3 cursor-pointer" />
                 
                 {/* Video calling icon */}
-                <FontAwesomeIcon onClick={() => makeVideoCall(444743152)}  icon={faVideo} className="text-cyan-700 mr-3 ms-3 cursor-pointer" />
+                <FontAwesomeIcon onClick={videCall} icon={faVideo} className="text-cyan-700 mr-3 ms-3 cursor-pointer" />
                 <div onClick={onOpen} className="w-7 h-7 rounded-full bg-slate-200 hover:bg-slate-400 ms-7 cursor-pointer flex justify-center items-center">
                     <FontAwesomeIcon icon={faEllipsisV} className=" text-cyan-700 "  />
                 </div>
