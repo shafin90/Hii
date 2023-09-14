@@ -7,7 +7,7 @@ import { authContext } from "../layout";
 //user's all chat will be displayed here
 
 const AllMessage = () => {
-    const {screenWidth, sendTrigger, setSendTrigger, buddyMail, setBuddyMail, userInfo } = useContext(authContext);
+    const {makeScroll, setMakeScroll, screenWidth, sendTrigger, setSendTrigger, buddyMail, setBuddyMail, userInfo } = useContext(authContext);
 
     // const {conversation} = useContext(authContext);
     const [text, setText] = useState([]) // All conversation to every body
@@ -36,6 +36,9 @@ const AllMessage = () => {
     // useEffect(() => {
     //     messageDivRef.current.scrollTop = messageDivRef.current.scrollHeight;
     // }, [chat, setChat])
+    if(makeScroll){
+        messageDivRef.current.scrollTop = messageDivRef.current.scrollHeight;
+    }
 
 
 
