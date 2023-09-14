@@ -23,7 +23,7 @@ const page = () => {
         handleLogin(email, password)
 
     }
-    if (userInfo) {
+    if (userInfo !== null) {
 
         router.push('../Home')
     }
