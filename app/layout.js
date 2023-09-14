@@ -178,7 +178,8 @@ export default function RootLayout({ children }) {
     isOpen,
     setIsOpen,
     onOpenList,
-    screenWidth
+    screenWidth,
+    setAllUser
   }
 
   return (

@@ -10,12 +10,9 @@ import { Box, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 
 
-
-
-
 const page = () => {
-    const router = useRouter()
-    const { handleLogin, userInfo } = useContext(authContext);//Getting data from layout.js through context API
+    const router = useRouter();
+    const { screeenWidth, handleLogin, userInfo } = useContext(authContext);//Getting data from layout.js through context API
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -54,7 +51,7 @@ const page = () => {
     }, []);
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center overflow-hidden p-24">
+        <div className={screeenWidth>576?"flex min-h-screen flex-col items-center justify-center overflow-hidden p-24":"flex min-h-screen flex-col items-center justify-center overflow-hidden p-4"}>
             <div data-aos="fade-up" data-aos-duration="1000" className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
                 <h2 className="text-2xl font-semibold mb-6">Login</h2>
 

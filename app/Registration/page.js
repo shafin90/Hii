@@ -9,7 +9,7 @@ import { authContext } from '../layout';
 
 
 const page = () => {
-    const { handleRegistration, name, userInfo } = useContext(authContext)// collecting data from layout.js through context API
+    const {screenWidth, handleRegistration, name, userInfo } = useContext(authContext)// collecting data from layout.js through context API
 console.log(userInfo)
     // Declaring state
     const [password, setPassword] = useState('');
@@ -61,7 +61,7 @@ console.log(userInfo)
     }, []);
 
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center overflow-hidden p-24">
+        <div className={screenWidth>576?"flex min-h-screen flex-col items-center justify-center overflow-hidden p-24":"flex min-h-screen flex-col items-center justify-center overflow-hidden p-3"}>
             <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
                 <h2 className="text-2xl font-semibold mb-6">Registration</h2>
 

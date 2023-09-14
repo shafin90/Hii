@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faVideo, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -28,24 +28,24 @@ import { useRouter } from 'next/navigation';
 
 
 const FriendList = ({visibility,size}) => {
-    const { screenWidth, handleLogout, allUser, setFrndImg, setFrndNm, buddyMail, setBuddyMail, profilePic, loggedInUserName, loggedInUserMail, loggedInUserPhoneNumber } = useContext(authContext)// getting data from layout.js through context API
+    const { screenWidth, handleLogout, allUser,setAllUser, setFrndImg, setFrndNm, buddyMail, setBuddyMail, profilePic, loggedInUserName, loggedInUserMail, loggedInUserPhoneNumber } = useContext(authContext)// getting data from layout.js through context API
     const router = useRouter();//Declaring router
 
     // Create a state to store the search query
     const [searchQuery, setSearchQuery] = useState('');
     const [isPopoverOpen, setPopoverOpen] = useState(false);
     const [isUserProfileModalOpen, setUserProfileModalOpen] = useState(false); // Track the modal's open state
-    const [list, setList] = useState([]);
+   
+    const [filteredUsers, setFilteredUsers] = useState([]);
 
     // Function to handle search input changes
-    const handleSearchInputChange = (e) => {
-        setSearchQuery(e.target.value);
-        console.log(allUser[0].phoneNumber)
-        console.log(searchQuery)
-        const newSelectedUser = allUser.find(e=>e.phoneNumber==searchQuery)
-        console.log(newSelectedUser)
-   };
+    useEffect(() => {
+        const filtered = allUser.filter(user => user.phoneNumber.includes(searchQuery));
+        setFilteredUsers(filtered);
+    }, [searchQuery, allUser]);
 
+
+    
     // Function to logout user.
     const logout = () => {
         handleLogout();
@@ -76,7 +76,7 @@ const FriendList = ({visibility,size}) => {
                             type="text"
                             placeholder="Search phone number"
                             value={searchQuery}
-                            onChange={handleSearchInputChange}
+                            onChange={e=>setSearchQuery(e.target.value)}
                             className="w-full p-2 pr-10 border rounded border-gray-300"
 
                         />
@@ -103,7 +103,7 @@ const FriendList = ({visibility,size}) => {
                 </div>
 
                 <ul className='w-full ps-5 '>
-                    {allUser.map(event => <li onClick={e => {
+                    {filteredUsers.map(event => <li onClick={e => {
                         setFrndImg(event.photoUrl)
                         setFrndNm(event.userName)
                         setBuddyMail(event?.email)
