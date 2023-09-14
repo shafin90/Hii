@@ -38,6 +38,7 @@ export default function RootLayout({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(1359);// Screen width in different device
   const [makeScroll, setMakeScroll] = useState(false) // Makes tha page strict mode or scroll mode
+  const [openDrawer, setOpenDrawer] = useState(false)   // In mobile device,, when user complete registration or login, user will show the drwaer first.
 
 
   // Feting all users information from database
@@ -62,9 +63,6 @@ export default function RootLayout({ children }) {
       window.removeEventListener('resize', updateScreenWidth);
     };
   }, [sendTrigger, setSendTrigger, userLoadTrigger, setUserLoadTrigger]);
-
-
-
 
 
 
@@ -99,7 +97,8 @@ export default function RootLayout({ children }) {
         setUserInfo(user)
         setUserLoadTrigger(!userLoadTrigger)
         console.log(user)
-      
+        setOpenDrawer(true)
+
       })
       .catch((error) => {
         console.log(error.message);
@@ -154,6 +153,10 @@ export default function RootLayout({ children }) {
   }
 
 
+
+
+
+
   // These are the value that will be passed through Context API
   const value = {
     handleLogin,
@@ -183,7 +186,9 @@ export default function RootLayout({ children }) {
     screenWidth,
     setAllUser,
     makeScroll,
-    setMakeScroll
+    setMakeScroll,
+    openDrawer ,
+    setOpenDrawer
   }
 
   return (

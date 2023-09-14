@@ -9,7 +9,7 @@ import { authContext } from '../layout';
 
 
 const page = () => {
-    const {screenWidth, handleRegistration, name, userInfo } = useContext(authContext)// collecting data from layout.js through context API
+    const {screenWidth, handleRegistration, name, userInfo, setOpenDrawer } = useContext(authContext)// collecting data from layout.js through context API
 console.log(userInfo)
     // Declaring state
     const [password, setPassword] = useState('');
@@ -39,6 +39,7 @@ console.log(userInfo)
             })
             .then((data) => {
                 console.log(data);
+                setOpenDrawer(true)
                 // Handle success response here
             })
             .catch((error) => {
