@@ -109,7 +109,7 @@ export default function RootLayout({ children }) {
   //  Function to logout user
   const handleLogout = () => {
     signOut(auth).then(() => {
-      setUserInfo('')
+      setUserInfo(null)
       router.push('./')
     }).catch((error) => {
       // An error happened.
