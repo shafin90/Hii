@@ -52,7 +52,7 @@ export default function RootLayout({ children }) {
   const updateScreenWidth = () => {
     setScreenWidth(window.innerWidth);
   };
-console.log(userInfo)
+
   // Add an event listener to update the screenWidth when the window is resized
   useEffect(() => {
     window.addEventListener('resize', updateScreenWidth);

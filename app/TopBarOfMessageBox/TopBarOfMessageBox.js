@@ -5,6 +5,7 @@ import { faPhone, faVideo, faEllipsisV, faPeopleGroup, faScroll, faScrollTorah, 
 import React, { useContext, useState, useRef } from "react";
 import { authContext } from "../layout";
 import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Input } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 
 
 
@@ -13,9 +14,9 @@ import { Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFoo
 
 const TopBarOfMessageBox = () => {
 
-    const {makeScroll, setMakeScroll, screenWidth, frndNm, frndImg, onOpenList } = useContext(authContext); // collecting data from layout.js through context API
+    const { makeScroll, setMakeScroll, screenWidth, frndNm, frndImg, onOpenList } = useContext(authContext); // collecting data from layout.js through context API
 
-
+    const router = useRouter();
 
     // Define state variables for the drawer
     const [isOpen, setIsOpen] = useState(false);
@@ -31,11 +32,13 @@ const TopBarOfMessageBox = () => {
         setIsOpen(false);
     };
 
-    const click = () =>{
+    const click = () => {
         setMakeScroll(!makeScroll)
     }
 
-
+    const vedioCall = () => {
+        router.push('../Room')
+    }
 
 
 
@@ -54,14 +57,14 @@ const TopBarOfMessageBox = () => {
             {/* This section contains audio call icon, vide call icon and three dot menu icon */}
             <div className=" flex justify-between items-center">
                 {/* scroll feature */}
-                <FontAwesomeIcon onClick={click} icon={faArrowCircleUp} className={makeScroll?"text-cyan-950 me-6 text-xl cursor-pointer":"text-cyan-700 me-6 cursor-pointer"} />
+                <FontAwesomeIcon onClick={click} icon={faArrowCircleUp} className={makeScroll ? "text-cyan-950 me-6 text-xl cursor-pointer" : "text-cyan-700 me-6 cursor-pointer"} />
                 {screenWidth < 576 && <FontAwesomeIcon onClick={onOpenList} icon={faPeopleGroup} className="text-cyan-700  me-5 cursor-pointer" />}
 
                 {/* audio calling icon */}
                 <FontAwesomeIcon icon={faPhone} className="text-cyan-700 mr-3 cursor-pointer" />
 
                 {/* Video calling icon */}
-                <FontAwesomeIcon icon={faVideo} className="text-cyan-700 mr-3 ms-3 cursor-pointer" />
+                <FontAwesomeIcon onClick={vedioCall} icon={faVideo} className="text-cyan-700 mr-3 ms-3 cursor-pointer" />
                 <div onClick={onOpen} className={screenWidth < 576 ? "w-7 h-7 rounded-full bg-slate-200 hover:bg-slate-400  cursor-pointer flex justify-center items-center" : "w-7 h-7 rounded-full bg-slate-200 hover:bg-slate-400 ms-7 cursor-pointer flex justify-center items-center"}>
                     <FontAwesomeIcon icon={faEllipsisV} className=" text-cyan-700 " />
                 </div>
