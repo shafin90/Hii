@@ -35,7 +35,7 @@ const Home = () => {
                         <FriendList visibility={screenWidth>576?"none":"flex"} size="chotoDevice"></FriendList>
 
                         <Button className="bg-slate-300 ms-11 px-4 py-2 mt-3 w-20 rounded" variant='outline' mr={3} onClick={onClose}>
-                            Cancel
+                             chat
                         </Button>
                     </DrawerBody>
                 </DrawerContent>
