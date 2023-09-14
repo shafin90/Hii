@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
   const [userLoadTrigger, setUserLoadTrigger] = useState(true); // When registration is doen, this triger is fired, and all users data fetched
   const [isOpen, setIsOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(1359);// Screen width in different device
-  const [makeScroll, setMakeScroll] = useState(false) // Makes tha page strict mode or scroll mode
+  const [makeScroll, setMakeScroll] = useState(true) // Makes tha page strict mode or scroll mode
   const [openDrawer, setOpenDrawer] = useState(false)   // In mobile device,, when user complete registration or login, user will show the drwaer first.
 
 
